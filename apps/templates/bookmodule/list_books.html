@@ -1,23 +1,12 @@
-{% extends "layouts/base.html" %}
+<h1>List of Books</h1>
+<ul>
+    {% for book in books %}
+        <li>
+            {{ book.title }} by {{ book.author }}
+            <a href="{% url 'edit_book' book.id %}">Edit</a>
+            <a href="{% url 'delete_book' book.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_book' %}">Add a New Book</a>
 
-{% load static %}
-
-{% block title %} List of Books {% endblock title %}
-
-{% block content %}
-  <h1>List of Books</h1>
-
-  <h2><a href="{% url 'books.view_one_book' bookId=1 %}">Internet & World Wide Web How to Program</a></h2>
-  <a href="{% url 'books.view_one_book' bookId=1 %}">
-      <img src="{% static 'book1.jpg' %}" alt="Book 1" width="200">
-  </a>
-  <hr>
-
-  <h2>C++ How to Program, Late Objects Version</h2>
-  <img src="{% static 'book2.jpg' %}" alt="Book 2" width="200">
-  <hr>
-
-  <h2>Images in Another Folder</h2>
-  <img src="{% static 'book3.jpg' %}" alt="Book 3" width="200">
-  <hr>
-{% endblock content %}
