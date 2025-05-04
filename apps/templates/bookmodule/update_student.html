@@ -1,0 +1,7 @@
+<!-- update_student.html -->
+<h1>Update Student</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ student_form.as_p }}
+    <button type="submit">Save Changes</button>
+</form>

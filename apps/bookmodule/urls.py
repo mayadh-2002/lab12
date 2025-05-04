@@ -1,9 +1,9 @@
 
 import apps.bookmodule.views
-from django.urls import path
+from django.urls import path , include
 from . import views
 from .views import add_book, simple_query
-from .views import  add_test_book , complex_query
+from .views import  add_test_book , complex_query , student_list
 """
 URL configuration for libraryproject project.
 
@@ -56,5 +56,10 @@ path('lab9_part2/listbooks', views.list_books2, name='list_books_part2'),
 path('lab9_part2/addbook', views.add_book2, name='add_book_part2'),
 path('lab9_part2/editbook/<int:id>', views.edit_book2, name='edit_book_part2'),
 path('lab9_part2/deletebook/<int:id>', views.delete_book2, name='delete_book_part2'),
-
+ path('students/', views.student_list, name='student_list'),
+    path('students/add/', views.add_student, name='add_student'),
+    path('students/update/<int:student_id>/', views.update_student, name='update_student'),
+    path('students/delete/<int:student_id>/', views.delete_student, name='delete_student'),
+    path('profile/list/', views.profile_list, name='profile_list'),
+ path('profile/add/', views.add_profile, name='add_profile'),
 ]

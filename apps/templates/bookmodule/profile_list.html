@@ -1,0 +1,15 @@
+<!-- profile_list.html -->
+<h1>Personal Profiles</h1>
+<ul>
+    {% for profile in profiles %}
+        <li>
+            <h2>{{ profile.name }}</h2>
+            <p>{{ profile.bio }}</p>
+            {% if profile.image %}
+                <img src="{{ profile.image.url }}" alt="{{ profile.name }}" width="200">
+            {% else %}
+                <p>dosnot ubload image</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

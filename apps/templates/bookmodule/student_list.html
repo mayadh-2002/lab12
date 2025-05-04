@@ -1,0 +1,16 @@
+<!-- student_list.html -->
+<h1>Students</h1>
+<ul>
+    {% for student in students %}
+        <li>{{ student.name }} - {{ student.age }}
+            <ul>
+                {% for address in student.addresses.all %}
+                    <li>{{ address.city }}</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'update_student' student.id %}">Edit</a> |
+            <a href="{% url 'delete_student' student.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_student' %}">Add New Student</a>

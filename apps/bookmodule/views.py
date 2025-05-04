@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Book,Student,Student1
-
+from .models import Book,Student,Student1,Address
+from .forms import StudentForm, AddressForm
 from django.db.models import Q
 from django.db.models import Sum, Avg, Max, Min,Count
 from django.db import models  
 from .models import Department,Course
 from .forms import BookForm
+from .forms import ProfileForm , Profile
 from django.shortcuts import get_object_or_404, redirect
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -211,3 +212,52 @@ def delete_book2(request, id):
     book = Book.objects.get(id=id)
     book.delete()
     return redirect('list_books_part2')
+
+def student_list(request):
+    students = Student.objects.all()  # جلب جميع الطلاب من قاعدة البيانات
+    return render(request, 'bookmodule/student_list.html', {'students': students})
+
+def add_student(request):
+    if request.method == 'POST':
+        student_form = StudentForm(request.POST)
+        if student_form.is_valid():
+            student = student_form.save()  # حفظ الطالب
+            return redirect('student_list')  # إعادة التوجيه إلى صفحة عرض الطلاب
+    else:
+        student_form = StudentForm()
+
+    return render(request, 'bookmodule/add_student.html', {'student_form': student_form})
+
+# تحديث بيانات الطالب
+def update_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    
+    if request.method == 'POST':
+        student_form = StudentForm(request.POST, instance=student)
+        if student_form.is_valid():
+            student_form.save()  # حفظ التعديلات
+            return redirect('student_list')
+    else:
+        student_form = StudentForm(instance=student)
+
+    return render(request, 'bookmodule/update_student.html', {'student_form': student_form})
+
+def delete_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    student.delete()  # حذف الطالب
+    return redirect('student_list')
+
+def add_profile(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)  # استخدام request.FILES للتعامل مع الملفات
+        if form.is_valid():
+            form.save()  # حفظ البيانات في قاعدة البيانات
+            return redirect('profile_list')  # بعد حفظ البيانات، إعادة التوجيه إلى صفحة عرض البيانات
+    else:
+        form = ProfileForm()
+
+    return render(request, 'bookmodule/add_profile.html', {'form': form})
+
+def profile_list(request):
+    profiles = Profile.objects.all()
+    return render(request, 'bookmodule/profile_list.html', {'profiles': profiles})

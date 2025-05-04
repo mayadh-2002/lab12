@@ -1,0 +1,7 @@
+<!-- add_profile.html -->
+<h1>Create Personal File</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- عرض الحقول في النموذج -->
+    <button type="submit">حفظ</button>
+</form>

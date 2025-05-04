@@ -18,16 +18,16 @@ import apps.bookmodule.views
 from django.contrib import admin
 from django.urls import include, path
 from django.shortcuts import render
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
         path('', apps.bookmodule.views.index),  
     path('books/', include("apps.bookmodule.urls")), #include urls.py of bookmodule app
     path('users/', include("apps.usermodule.urls")),  #include urls.py of usermodule app
-    
     path('books/', include("apps.bookmodule.urls")),
-     
-]
-
+   
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 
