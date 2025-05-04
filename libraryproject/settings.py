@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.bookmodule', 
     'apps.usermodule',
+    'users',
 ]
-
+LOGIN_URL = '/users/login'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

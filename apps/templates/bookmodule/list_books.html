@@ -6,7 +6,9 @@
             <a href="{% url 'edit_book' book.id %}">Edit</a>
             <a href="{% url 'delete_book' book.id %}">Delete</a>
         </li>
+
     {% endfor %}
+    <a href="/users/logout">Logout</a>
 </ul>
 <a href="{% url 'add_book' %}">Add a New Book</a>
 

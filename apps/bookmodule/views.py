@@ -11,9 +11,8 @@ from .forms import ProfileForm , Profile
 from django.shortcuts import get_object_or_404, redirect
 def index(request):
     return render(request, "bookmodule/index.html")
- 
-def list_books(request):
-    return render(request, 'bookmodule/list_books.html')
+#def list_books(request):
+   # return render(request, 'bookmodule/list_books.html')
 
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
@@ -146,13 +145,16 @@ def task4_view(request):
     return render(request, 'bookmodule/task4.html', {'departments': departments})
 from django.shortcuts import render
 from .models import Book  # استيراد النموذج الخاص بالكتب
+from django.contrib.auth.decorators import login_required
+from .models import Book
+from django.shortcuts import render
 
+@login_required(login_url='/users/login')
 def list_books(request):
-    books = Book.objects.all()  # جلب جميع الكتب من قاعدة البيانات
-    return render(request, 'bookmodule/list_books.html', {'books': books})  # تمرير الكتب للقالب
+    books = Book.objects.all()
+    return render(request, 'bookmodule/list_books.html', {'books': books})
 from django.shortcuts import render, redirect
 from .models import Book
-
 def add_book(request):
     if request.method == 'POST':
         title = request.POST['title']

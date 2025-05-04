@@ -26,7 +26,7 @@ from .views import add_book
 from .views import simple_query
 urlpatterns = [
     path('', views.index, name="books.index"),  
-    path('list_books/', views.list_books, name="books.list_books"),
+    #path('list_books/', views.list_books, name="books.list_books"),
     path('<int:bookId>/', views.viewbook, name="books.view_one_book"),
     path('aboutus/', views.aboutus, name="books.aboutus"),
    path('html5/links', views.links, name='book.links'),
@@ -48,7 +48,9 @@ path('lab9/task1/', views.task1_view, name='task1'),
 path('lab9/task2/', views.task2_view, name='task2'),
 path('lab9/task3/', views.task3_view, name='task3'),
 path('lab9/task4/', views.task4_view, name='task4'),
-path('lab9_part1/listbooks', views.list_books, name='list_books'),
+path('list_books/', views.list_books, name='list_books'),
+
+
  path('lab9_part1/addbook', views.add_book, name='add_book'),
 path('lab9_part1/editbook/<int:id>', views.edit_book, name='edit_book'),
 path('lab9_part1/deletebook/<int:id>', views.delete_book, name='delete_book'),
@@ -62,4 +64,5 @@ path('lab9_part2/deletebook/<int:id>', views.delete_book2, name='delete_book_par
     path('students/delete/<int:student_id>/', views.delete_student, name='delete_student'),
     path('profile/list/', views.profile_list, name='profile_list'),
  path('profile/add/', views.add_profile, name='add_profile'),
+ 
 ]
